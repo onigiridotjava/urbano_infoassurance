@@ -1,6 +1,4 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+
 
 ## e-Sumbong Mo — San Mateo (QA & API Testing)
 
@@ -8,7 +6,12 @@
 **Author:** Katelyn Laurin H. Urbano (BSIT - INF245)
 
 ---
+## Where is the PDF file of the activies
+I have uploaded my activities inside the data folder 
 
+data 
+   >
+    ACTIVITIES
 ## How to Run Locally
 
 1. Open the project folder in VS Code and open the terminal (`Ctrl + ~`).
