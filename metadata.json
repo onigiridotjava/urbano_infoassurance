@@ -1,0 +1,6 @@
+{
+  "name": "e-Sumbong Mo",
+  "description": "Citizen reporting platform for non-hazard community concerns and public safety hazards with media evidence, interactive mapping, and real-time resolution tracking.",
+  "requestFramePermissions": ["geolocation", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

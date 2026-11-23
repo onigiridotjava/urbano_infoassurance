@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 3,
+  "users": [
+    {
+      "id": "usr_citizen_1",
+      "name": "Katelyn Urbano",
+      "email": "katelyn.urbano@gmail.com",
+      "role": "citizen",
+      "barangay": "Guitnang Bayan I",
+      "passwordHash": "acc60fc0958c89758d722b510c9faadb:cc7277d12f66da47d9ccbfede12c9d0bd38925806817830ae4c4bdbe5fbc9002982e47b3b10c0fcd31762214c5d06232bac5230a5b424b3a6629cd2d80f2a0f3"
+    },
+    {
+      "id": "usr_citizen_2",
+      "name": "John Carlo Cabral",
+      "email": "jc.cabral@gmail.com",
+      "role": "citizen",
+      "barangay": "Ampid I",
+      "passwordHash": "62ea9ba2d3b52304e63252087bd202a7:059d1b1110cb2d5ec027081865ffb4423abe719dcbdd84962808be8b1ae79a71de582e1d2db5ddd16efa9deeb5de20759aaf90ac9c9adc7553aa0cb8d4ef3ffc"
+    },
+    {
+      "id": "usr_lgu_1",
+      "name": "Engr. Marco Villanueva",
+      "email": "dispatch@sanmateo.gov.ph",
+      "role": "lgu_officer",
+      "barangay": "Guitnang Bayan I",
+      "department": "Municipal Engineering Office",
+      "passwordHash": "f5f2ebde19a8d9a89e726ff09fa21bd5:6ccd67cbba094ef3b201ba79582ceb153293ba6b785feee0adb95804c8f26c9d9eb029f8500642bee1e768547ff3e018af3a5d8fccb40922810f1357962b8a19"
+    }
+  ],
+  "reports": [
+    {
+      "id": "ESM-SM-0106",
+      "reporterId": "usr_citizen_1",
+      "reporterName": "Katelyn Urbano",
+      "reporterEmail": "katelyn.urbano@gmail.com",
+      "reportClass": "non_hazard",
+      "category": "Trash & Collection",
+      "title": "Delayed morning collection along Gen. Luna Ave.",
+      "description": "Household waste sacks waiting at the corner pickup station since 6:30 AM near Guitnang Bayan I market.",
+      "mediaUrl": "/assets/evidence/waste_report.svg",
+      "mediaType": "image",
+      "mediaName": "gen_luna_trash.svg",
+      "lat": 14.6972,
+      "lng": 121.1211,
+      "addressLabel": "Gen. Luna Ave., Guitnang Bayan I, San Mateo",
+      "barangay": "Guitnang Bayan I",
+      "status": "in_progress",
+      "assignedDepartment": "San Mateo Solid Waste & Sanitation",
+      "aiAnalysis": {
+        "suggestedClass": "non_hazard",
+        "suggestedCategory": "Trash & Collection",
+        "suggestedDepartment": "San Mateo Solid Waste & Sanitation",
+        "severity": "Moderate",
+        "confidence": 0.96,
+        "summary": "Sanitation pickup delay along Gen. Luna Ave.",
+        "duplicateOfId": null,
+        "duplicateReason": null,
+        "source": "heuristic"
+      },
+      "timeline": [
+        {
+          "status": "submitted",
+          "timestamp": "2026-11-23T12:17:27.657Z",
+          "actor": "Katelyn Urbano",
+          "note": "Photo evidence uploaded with GPS pin."
+        },
+        {
+          "status": "triaged",
+          "timestamp": "2026-11-23T12:19:27.657Z",
+          "actor": "AI Intake Triage",
+          "note": "Categorized under Trash & Collection; zero duplicate reports found."
+        },
+        {
+          "status": "assigned",
+          "timestamp": "2026-11-23T13:07:27.657Z",
+          "actor": "Engr. Marco Villanueva",
+          "note": "Dispatched to San Mateo Solid Waste Truck #04."
+        },
+        {
+          "status": "in_progress",
+          "timestamp": "2026-11-23T14:15:27.657Z",
+          "actor": "Sanitation Crew #04",
+          "note": "Collection crew arrived along Gen. Luna Ave."
+        }
+      ],
+      "createdAt": "2026-11-23T12:17:27.657Z",
+      "updatedAt": "2026-11-23T14:15:27.657Z"
+    },
+    {
+      "id": "ESM-SM-0105",
+      "reporterId": "usr_citizen_2",
+      "reporterName": "John Carlo Cabral",
+      "reporterEmail": "jc.cabral@gmail.com",
+      "reportClass": "non_hazard",
+      "category": "Double Parking & Driveway",
+      "title": "Delivery van blocking residential driveway in Ampid I",
+      "description": "Commercial delivery vehicle double-parked along Patiis Rd. junction blocking school foot traffic.",
+      "mediaUrl": "/assets/evidence/sidewalk_report.svg",
+      "mediaType": "image",
+      "mediaName": "ampid_double_park.svg",
+      "lat": 14.6884,
+      "lng": 121.1164,
+      "addressLabel": "Patiis Rd. cor. Gen. Luna, Ampid I, San Mateo",
+      "barangay": "Ampid I",
+      "status": "assigned",
+      "assignedDepartment": "Traffic Management & Ordinance",
+      "aiAnalysis": {
+        "suggestedClass": "non_hazard",
+        "suggestedCategory": "Double Parking & Driveway",
+        "suggestedDepartment": "Traffic Management & Ordinance",
+        "severity": "Low",
+        "confidence": 0.94,
+        "summary": "Sidewalk & driveway obstruction near Ampid I junction.",
+        "duplicateOfId": null,
+        "duplicateReason": null,
+        "source": "heuristic"
+      },
+      "timeline": [
+        {
+          "status": "submitted",
+          "timestamp": "2026-11-23T11:17:27.657Z",
+          "actor": "John Carlo Cabral",
+          "note": "Photo evidence submitted."
+        },
+        {
+          "status": "triaged",
+          "timestamp": "2026-11-23T11:19:27.657Z",
+          "actor": "AI Intake Triage",
+          "note": "Classified as Double Parking & Driveway."
+        },
+        {
+          "status": "assigned",
+          "timestamp": "2026-11-23T13:32:27.657Z",
+          "actor": "Engr. Marco Villanueva",
+          "note": "Assigned to Traffic Management Patrol B."
+        }
+      ],
+      "createdAt": "2026-11-23T11:17:27.657Z",
+      "updatedAt": "2026-11-23T13:32:27.657Z"
+    },
+    {
+      "id": "ESM-SM-0104",
+      "reporterId": "usr_citizen_1",
+      "reporterName": "Katelyn Urbano",
+      "reporterEmail": "katelyn.urbano@gmail.com",
+      "reportClass": "safety_hazard",
+      "category": "Drinking Water & Leaks",
+      "title": "Clean water main valve leak on M.H. Del Pilar St.",
+      "description": "Pressurized pipe valve leaking across the gutter near Guitnang Bayan II residential block.",
+      "mediaUrl": "/assets/evidence/water_leak_report.svg",
+      "mediaType": "image",
+      "mediaName": "del_pilar_leak.svg",
+      "lat": 14.6991,
+      "lng": 121.1238,
+      "addressLabel": "M.H. Del Pilar St., Guitnang Bayan II, San Mateo",
+      "barangay": "Guitnang Bayan II",
+      "status": "triaged",
+      "assignedDepartment": "Waterworks & Utilities Desk",
+      "aiAnalysis": {
+        "suggestedClass": "safety_hazard",
+        "suggestedCategory": "Drinking Water & Leaks",
+        "suggestedDepartment": "Waterworks & Utilities Desk",
+        "severity": "Urgent",
+        "confidence": 0.95,
+        "summary": "Water main leak routed to Waterworks & Utilities Desk.",
+        "duplicateOfId": "ESM-SM-0102",
+        "duplicateReason": "Possible nearby infrastructure report ESM-SM-0102 within 250m.",
+        "source": "heuristic"
+      },
+      "timeline": [
+        {
+          "status": "submitted",
+          "timestamp": "2026-11-23T13:49:27.657Z",
+          "actor": "Katelyn Urbano",
+          "note": "Submitted photo evidence and GPS tag."
+        },
+        {
+          "status": "triaged",
+          "timestamp": "2026-11-23T13:50:27.657Z",
+          "actor": "AI Intake Triage",
+          "note": "Acknowledged & routed to Waterworks & Utilities Desk."
+        }
+      ],
+      "createdAt": "2026-11-23T13:49:27.657Z",
+      "updatedAt": "2026-11-23T13:50:27.657Z"
+    },
+    {
+      "id": "ESM-SM-0103",
+      "reporterId": "usr_citizen_2",
+      "reporterName": "John Carlo Cabral",
+      "reporterEmail": "jc.cabral@gmail.com",
+      "reportClass": "non_hazard",
+      "category": "Pests, Trees & Vandalism",
+      "title": "Overgrown acacia branches near Dulong Bayan II school gate",
+      "description": "Low-hanging tree canopy touching streetlamp arm and obscuring pedestrian signage.",
+      "mediaUrl": "/assets/evidence/tree_greenery_report.svg",
+      "mediaType": "image",
+      "mediaName": "dulong_bayan_trees.svg",
+      "resolutionMediaUrl": "/assets/evidence/tree_greenery_report.svg",
+      "lat": 14.7024,
+      "lng": 121.1258,
+      "addressLabel": "Daang Bakal St., Dulong Bayan II, San Mateo",
+      "barangay": "Dulong Bayan II",
+      "status": "resolved",
+      "assignedDepartment": "Parks, Forestry & Pest Control",
+      "aiAnalysis": {
+        "suggestedClass": "non_hazard",
+        "suggestedCategory": "Pests, Trees & Vandalism",
+        "suggestedDepartment": "Parks, Forestry & Pest Control",
+        "severity": "Moderate",
+        "confidence": 0.93,
+        "summary": "Tree canopy pruning near Dulong Bayan II.",
+        "duplicateOfId": null,
+        "duplicateReason": null,
+        "source": "heuristic"
+      },
+      "timeline": [
+        {
+          "status": "submitted",
+          "timestamp": "2026-11-22T14:37:27.657Z",
+          "actor": "John Carlo Cabral",
+          "note": "Uploaded photo evidence."
+        },
+        {
+          "status": "triaged",
+          "timestamp": "2026-11-22T14:42:27.657Z",
+          "actor": "AI Intake Triage",
+          "note": "Acknowledged & checked for duplicates."
+        },
+        {
+          "status": "assigned",
+          "timestamp": "2026-11-22T20:17:27.657Z",
+          "actor": "Engr. Marco Villanueva",
+          "note": "Dispatched to Parks & Forestry Pruning Team."
+        },
+        {
+          "status": "resolved",
+          "timestamp": "2026-11-23T08:37:27.657Z",
+          "actor": "Forestry Crew A",
+          "note": "Branches trimmed safely and cleared from lamp post."
+        }
+      ],
+      "feedback": {
+        "rating": 5,
+        "comment": "Very clean work by the San Mateo forestry crew.",
+        "submittedAt": "2026-11-23T10:37:27.657Z"
+      },
+      "createdAt": "2026-11-22T14:37:27.657Z",
+      "updatedAt": "2026-11-23T10:37:27.657Z"
+    },
+    {
+      "id": "ESM-SM-0102",
+      "reporterId": "usr_citizen_1",
+      "reporterName": "Katelyn Urbano",
+      "reporterEmail": "katelyn.urbano@gmail.com",
+      "reportClass": "safety_hazard",
+      "category": "Road Damage / Pothole",
+      "title": "Water-filled asphalt pothole along J.P. Rizal St., Sta. Ana",
+      "description": "Road depression holding standing water near tricycle terminal.",
+      "mediaUrl": "/assets/evidence/pothole_report.svg",
+      "mediaType": "image",
+      "mediaName": "sta_ana_pothole.svg",
+      "lat": 14.6956,
+      "lng": 121.1208,
+      "addressLabel": "J.P. Rizal St., Sta. Ana, San Mateo",
+      "barangay": "Sta. Ana",
+      "status": "assigned",
+      "assignedDepartment": "Municipal Engineering Office",
+      "aiAnalysis": {
+        "suggestedClass": "safety_hazard",
+        "suggestedCategory": "Road Damage / Pothole",
+        "suggestedDepartment": "Municipal Engineering Office",
+        "severity": "Urgent",
+        "confidence": 0.97,
+        "summary": "Road surface patching required in Sta. Ana.",
+        "duplicateOfId": null,
+        "duplicateReason": null,
+        "source": "heuristic"
+      },
+      "timeline": [
+        {
+          "status": "submitted",
+          "timestamp": "2026-11-23T09:27:27.657Z",
+          "actor": "Katelyn Urbano",
+          "note": "Photo evidence uploaded."
+        },
+        {
+          "status": "triaged",
+          "timestamp": "2026-11-23T09:29:27.657Z",
+          "actor": "AI Intake Triage",
+          "note": "Routed to Municipal Engineering Office."
+        },
+        {
+          "status": "assigned",
+          "timestamp": "2026-11-23T11:57:27.657Z",
+          "actor": "Engr. Marco Villanueva",
+          "note": "Scheduled for cold-mix asphalt patching."
+        }
+      ],
+      "createdAt": "2026-11-23T09:27:27.657Z",
+      "updatedAt": "2026-11-23T11:57:27.657Z"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "ANN-SM-02",
+      "title": "Gen. Luna Ave. Storm Drain Desilting Schedule",
+      "category": "Road Closure",
+      "barangayScope": "Guitnang Bayan I & II",
+      "message": "Outer lane clearing runs Saturday 6:00 AM – 1:00 PM near Municipal Hall. Follow traffic enforcer detours.",
+      "authorName": "Municipal Engineering Office",
+      "createdAt": "2026-11-23T09:57:27.657Z"
+    },
+    {
+      "id": "ANN-SM-01",
+      "title": "San Mateo Sunday Civic Health & Animal Welfare Caravan",
+      "category": "Municipal Notice",
+      "barangayScope": "Sta. Ana & Ampid I",
+      "message": "Free anti-rabies vaccination and barangay consultation at Town Plaza from 7:00 AM to 3:00 PM.",
+      "authorName": "San Mateo LGU Public Desk",
+      "createdAt": "2026-11-22T11:57:27.657Z"
+    }
+  ],
+  "sessionSecret": "0cad784a194801b8b8154cd774e29563ab1efa752b1e0c5fbad82a431b96d5f2"
+}
