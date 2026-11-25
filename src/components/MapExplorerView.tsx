@@ -28,6 +28,7 @@ interface MapExplorerViewProps {
   highlightedReportId: string | null;
   onTrackReport: (reportId: string) => void;
   onReportUpdated: (report: IncidentReport) => void;
+  isMobileView?: boolean;
 }
 
 export const MapExplorerView: React.FC<MapExplorerViewProps> = ({
@@ -38,6 +39,7 @@ export const MapExplorerView: React.FC<MapExplorerViewProps> = ({
   highlightedReportId,
   onTrackReport,
   onReportUpdated,
+  isMobileView = false,
 }) => {
   const t = TRANSLATIONS[lang];
 
@@ -157,8 +159,16 @@ export const MapExplorerView: React.FC<MapExplorerViewProps> = ({
         </div>
 
         {/* Split-Screen Map + Barangay/Category Filter Sidebar */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          <div className="lg:col-span-8 bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-3 h-[560px] shadow-sm">
+        <div
+          className={`grid grid-cols-1 ${
+            isMobileView ? 'gap-4' : 'lg:grid-cols-12 gap-6'
+          } items-stretch`}
+        >
+          <div
+            className={`${
+              isMobileView ? 'h-[320px]' : 'lg:col-span-8 h-[400px] sm:h-[560px]'
+            } bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-2.5 sm:p-3 shadow-sm`}
+          >
             <IncidentMap
               reports={visibleReports}
               mode="explorer"
@@ -167,10 +177,15 @@ export const MapExplorerView: React.FC<MapExplorerViewProps> = ({
               showIncidents={showIncidents}
               showClosures={showClosures}
               showFacilities={showFacilities}
+              className={isMobileView ? 'min-h-[290px]' : ''}
             />
           </div>
 
-          <div className="lg:col-span-4 bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] flex flex-col max-h-[560px] overflow-hidden shadow-sm">
+          <div
+            className={`${
+              isMobileView ? '' : 'lg:col-span-4 max-h-[560px]'
+            } bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] flex flex-col overflow-hidden shadow-sm`}
+          >
             <div className="p-3.5 bg-[#154792] text-white space-y-2.5">
               <div className="text-xs font-extrabold text-[#FBE95C]">
                 San Mateo Barangay &amp; Category Filter

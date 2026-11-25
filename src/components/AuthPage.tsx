@@ -6,12 +6,14 @@ interface AuthPageProps {
   onSuccess: (user: User, token: string) => void;
   onCancel: () => void;
   contextMessage?: string;
+  isMobileView?: boolean;
 }
 
 export const AuthPage: React.FC<AuthPageProps> = ({
   onSuccess,
   onCancel,
   contextMessage,
+  isMobileView = false,
 }) => {
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const [roleView, setRoleView] = useState<'citizen' | 'lgu_officer'>('citizen');
@@ -90,8 +92,12 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   };
 
   return (
-    <section className="min-h-[calc(100vh-140px)] bg-[#F3F7FD] py-8 sm:py-12 px-4 sm:px-6 flex flex-col items-center justify-center">
-      <div className="w-full max-w-5xl mb-4 flex items-center justify-between">
+    <section
+      className={`min-h-[calc(100vh-140px)] bg-[#F3F7FD] ${
+        isMobileView ? 'py-4 px-3' : 'py-8 sm:py-12 px-4 sm:px-6'
+      } flex flex-col items-center justify-center`}
+    >
+      <div className="w-full max-w-5xl mb-3 flex items-center justify-between">
         <button
           type="button"
           onClick={onCancel}
@@ -100,104 +106,85 @@ export const AuthPage: React.FC<AuthPageProps> = ({
           <ArrowLeft className="w-4 h-4" />
           Back to Portal
         </button>
-        {contextMessage && (
-          <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FBE95C] text-[#154792] text-xs font-bold">
+        {contextMessage && !isMobileView && (
+          <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFD700] text-[#154792] text-xs font-bold">
             {contextMessage}
           </div>
         )}
       </div>
 
       {contextMessage && (
-        <div className="sm:hidden w-full max-w-5xl mb-4 px-4 py-2.5 rounded-2xl bg-[#FBE95C] text-[#154792] text-xs font-bold">
+        <div
+          className={`${
+            isMobileView ? 'block' : 'sm:hidden'
+          } w-full max-w-5xl mb-3 px-4 py-2.5 rounded-2xl bg-[#FFD700] text-[#154792] text-xs font-bold`}
+        >
           {contextMessage}
         </div>
       )}
 
       {/* Asymmetric Split-Screen Card */}
-      <div className="w-full max-w-5xl bg-[#FEFFFE] rounded-tl-[48px] rounded-br-[48px] rounded-tr-2xl rounded-bl-2xl shadow-2xl shadow-[#154792]/15 border border-[#d9e6f7] overflow-hidden grid grid-cols-1 lg:grid-cols-12">
-        {/* Left Panel (#FEFFFE White) */}
-        <div className="lg:col-span-6 bg-[#FEFFFE] p-8 sm:p-10 flex flex-col justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#154792] flex items-center justify-center text-[#FBE95C] font-extrabold text-sm">
-              eS
-            </div>
-            <div>
-              <span className="font-display font-extrabold text-base text-[#154792] tracking-tight">
-                e-Sumbong Mo
-              </span>
-              <span className="mx-1.5 text-[#5EABF0]">•</span>
-              <span className="text-xs font-bold text-[#1177F0] uppercase tracking-wide">
-                San Mateo
-              </span>
-            </div>
+      <div
+        className={`w-full max-w-5xl bg-[#FEFFFE] ${
+          isMobileView
+            ? 'rounded-3xl grid-cols-1'
+            : 'rounded-tl-[48px] rounded-br-[48px] rounded-tr-2xl rounded-bl-2xl grid-cols-1 lg:grid-cols-12'
+        } shadow-2xl shadow-[#154792]/15 border border-[#d9e6f7] overflow-hidden grid`}
+      >
+        {/* Left Brand Panel (White) */}
+        <div
+          className={`${
+            isMobileView ? 'p-6' : 'lg:col-span-6 p-8 sm:p-10'
+          } bg-[#FEFFFE] flex flex-col justify-between`}
+        >
+          {/* Top-Left Wordmark */}
+          <div className="flex items-center gap-2">
+            <span className="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-[#154792]">
+              e-Sumbong Mo
+            </span>
+            <span className="text-xs font-bold tracking-wider uppercase text-[#1177F0]">
+              • SAN MATEO
+            </span>
           </div>
 
-          {/* Clean Civic Vector Illustration in #1177F0 & #FBE95C */}
-          <div className="my-8 flex items-center justify-center">
-            <svg
-              viewBox="0 0 360 240"
-              className="w-full max-w-[320px] h-auto"
-              fill="none"
-              aria-hidden="true"
-            >
-              <rect x="20" y="24" width="320" height="184" rx="28" fill="#F3F7FD" />
-              {/* Sierra Madre hills */}
-              <path
-                d="M28 168 L92 104 L148 142 L214 88 L286 138 L332 114 L332 184 L28 184 Z"
-                fill="#5EABF0"
-                fillOpacity="0.24"
-              />
-              {/* San Mateo Municipal Hall silhouette */}
-              <rect x="78" y="106" width="110" height="72" rx="8" fill="#154792" />
-              <rect x="106" y="88" width="54" height="22" rx="4" fill="#1177F0" />
-              <rect x="129" y="66" width="8" height="24" rx="2" fill="#154792" />
-              <circle cx="133" cy="64" r="6" fill="#FBE95C" />
-              <rect x="92" y="122" width="14" height="16" rx="2" fill="#F3F7FD" />
-              <rect x="114" y="122" width="14" height="16" rx="2" fill="#F3F7FD" />
-              <rect x="136" y="122" width="14" height="16" rx="2" fill="#F3F7FD" />
-              <rect x="158" y="122" width="14" height="16" rx="2" fill="#F3F7FD" />
-              <rect x="122" y="148" width="22" height="30" rx="4" fill="#FBE95C" />
-
-              {/* Floating Pin & Verified Check Card */}
-              <rect
-                x="196"
-                y="62"
-                width="112"
-                height="96"
-                rx="18"
-                fill="#FEFFFE"
-                stroke="#D6E4F7"
-                strokeWidth="2"
-              />
-              <circle cx="252" cy="96" r="18" fill="#1177F0" />
-              <circle cx="252" cy="96" r="7" fill="#FBE95C" />
-              <rect x="216" y="124" width="72" height="8" rx="4" fill="#154792" fillOpacity="0.85" />
-              <rect x="226" y="138" width="52" height="6" rx="3" fill="#5EABF0" />
-
-              {/* Status pill badge */}
-              <rect x="44" y="156" width="88" height="28" rx="14" fill="#FBE95C" />
-              <circle cx="60" cy="170" r="5" fill="#154792" />
-              <rect x="70" y="167" width="48" height="6" rx="3" fill="#154792" />
-            </svg>
+          {/* Centered Large ES + Siren Logo */}
+          <div className="my-10 flex flex-col items-center justify-center">
+            <img
+              src="/media/E-sumbong logo.png"
+              alt="e-Sumbong Mo logo"
+              className={`${
+                isMobileView ? 'w-36 h-36' : 'w-48 h-48 sm:w-56 sm:h-56'
+              } object-contain drop-shadow-md`}
+            />
           </div>
 
-          <p className="text-sm sm:text-base font-bold text-[#154792] text-balance">
-            Report neighborhood hazards. Track real-time LGU action.
+          {/* Bottom San Mateo Motto */}
+          <p className="text-center text-xs sm:text-sm font-medium text-slate-800 leading-relaxed max-w-sm mx-auto">
+            Isang bayang <span className="font-extrabold text-[#154792]">MASIGLA</span>,{' '}
+            <span className="font-extrabold text-[#154792]">MATATAG</span> at{' '}
+            <span className="font-extrabold text-[#154792]">MAKAKALIKASAN</span> na may{' '}
+            <span className="font-extrabold text-[#154792]">TAPAT</span> at{' '}
+            <span className="font-extrabold text-[#154792]">RESPONSIBONG</span>{' '}
+            pamahalaang para sa lahat
           </p>
         </div>
 
         {/* Right Panel (#154792 Deep Navy) */}
-        <div className="lg:col-span-6 bg-[#154792] text-white p-8 sm:p-10 flex flex-col justify-between">
+        <div
+          className={`${
+            isMobileView ? 'p-5' : 'lg:col-span-6 p-6 sm:p-10'
+          } bg-[#154792] text-white flex flex-col justify-between`}
+        >
           <div>
             <div className="flex items-center justify-between gap-2 mb-6">
               <div>
                 <h2 className="font-display text-2xl font-extrabold text-white">
-                  {mode === 'login' ? 'Welcome back' : 'Create Citizen Account'}
+                  {mode === 'login' ? 'WELCOME' : 'Create Citizen Account'}
                 </h2>
                 <p className="text-xs text-[#BFD9FA] mt-1 font-medium">
                   {roleView === 'lgu_officer'
                     ? 'San Mateo LGU Staff & Dispatch Access'
-                    : 'San Mateo Resident Reporting Access'}
+                    : 'San Mateo, Rizal Resident Report Portal'}
                 </p>
               </div>
               <button
@@ -206,7 +193,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                   setMode((m) => (m === 'login' ? 'register' : 'login'));
                   setError(null);
                 }}
-                className="text-xs font-bold text-[#FBE95C] hover:underline whitespace-nowrap shrink-0"
+                className="text-xs font-bold text-[#FFD700] hover:underline whitespace-nowrap shrink-0"
               >
                 {mode === 'login' ? 'Register' : 'Sign In'}
               </button>
@@ -231,7 +218,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Juan Dela Cruz"
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#FEFFFE] text-[#154792] placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FBE95C]"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#FEFFFE] text-[#154792] placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
                     />
                   </div>
                   <div>
@@ -241,7 +228,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                     <select
                       value={barangay}
                       onChange={(e) => setBarangay(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#FEFFFE] text-[#154792] text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FBE95C]"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#FEFFFE] text-[#154792] text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
                     >
                       {SAN_MATEO_BARANGAYS.map((b) => (
                         <option key={b} value={b}>
@@ -263,7 +250,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="resident@sanmateo.ph"
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FEFFFE] text-[#154792] placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FBE95C]"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#FEFFFE] text-[#154792] placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
                 />
               </div>
 
@@ -279,7 +266,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••"
-                    className="w-full px-4 py-2.5 pr-11 rounded-xl bg-[#FEFFFE] text-[#154792] placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FBE95C]"
+                    className="w-full px-4 py-2.5 pr-11 rounded-xl bg-[#FEFFFE] text-[#154792] placeholder-slate-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
                   />
                   <button
                     type="button"
@@ -292,11 +279,11 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                 </div>
               </div>
 
-              {/* White primary Sign In button with #154792 text */}
+              {/* Primary Sign In button */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl bg-[#FEFFFE] hover:bg-[#F3F7FD] text-[#154792] font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-md disabled:opacity-60"
+                className="w-full py-3 rounded-xl bg-[#5EABF0] hover:bg-[#1177F0] text-white font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-md disabled:opacity-60"
               >
                 {loading && <Loader2 className="w-4 h-4 animate-spin" />}
                 {mode === 'login' ? 'Sign In' : 'Create Account'}
@@ -305,7 +292,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
             <div className="my-4 flex items-center gap-3 text-[11px] text-[#9CC4F5]">
               <div className="h-px flex-1 bg-white/15" />
-              <span>OR</span>
+              <span>or</span>
               <div className="h-px flex-1 bg-white/15" />
             </div>
 
@@ -313,12 +300,24 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               type="button"
               disabled={loading}
               onClick={handleGoogleContinue}
-              className="w-full py-2.5 rounded-xl bg-[#145EC1] hover:bg-[#1177F0] border border-white/20 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2.5"
+              className="w-full py-2.5 rounded-xl bg-[#FEFFFE] hover:bg-[#F3F7FD] text-slate-800 font-semibold text-sm transition-colors flex items-center justify-center gap-2.5 shadow-sm"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
                 <path
-                  fill="#FBE95C"
-                  d="M21.35 11.1H12v3.2h5.35c-.5 2.3-2.5 3.8-5.35 3.8a6 6 0 1 1 0-12c1.5 0 2.85.55 3.9 1.45l2.3-2.3A9.3 9.3 0 0 0 12 2.7a9.3 9.3 0 1 0 0 18.6c5.35 0 8.95-3.75 8.95-9.05 0-.4-.05-.8-.1-1.15Z"
+                  fill="#4285F4"
+                  d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82Z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-3.98v3.09C3.515 21.3 7.565 24 12.255 24Z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62h-3.98a11.86 11.86 0 0 0 0 10.76l3.98-3.09Z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C18.205 1.19 15.495 0 12.255 0c-4.69 0-8.74 2.7-10.71 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96Z"
                 />
               </svg>
               Continue with Google
@@ -333,7 +332,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                 onClick={() => switchRolePreset('citizen')}
                 className={`py-2 px-3 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
                   roleView === 'citizen'
-                    ? 'bg-[#FBE95C] text-[#154792]'
+                    ? 'bg-[#FFD700] text-[#154792]'
                     : 'text-[#D6E6FB] hover:text-white'
                 }`}
               >
@@ -345,7 +344,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                 onClick={() => switchRolePreset('lgu_officer')}
                 className={`py-2 px-3 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
                   roleView === 'lgu_officer'
-                    ? 'bg-[#FBE95C] text-[#154792]'
+                    ? 'bg-[#FFD700] text-[#154792]'
                     : 'text-[#D6E6FB] hover:text-white'
                 }`}
               >

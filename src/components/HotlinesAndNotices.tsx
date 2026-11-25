@@ -9,6 +9,7 @@ interface HotlinesAndNoticesProps {
   token: string | null;
   lang: LanguageCode;
   onAnnouncementCreated: (ann: CityAnnouncement) => void;
+  isMobileView?: boolean;
 }
 
 export const HotlinesAndNotices: React.FC<HotlinesAndNoticesProps> = ({
@@ -17,6 +18,7 @@ export const HotlinesAndNotices: React.FC<HotlinesAndNoticesProps> = ({
   token,
   lang,
   onAnnouncementCreated,
+  isMobileView = false,
 }) => {
   const t = TRANSLATIONS[lang];
   const [title, setTitle] = useState('');
@@ -61,8 +63,12 @@ export const HotlinesAndNotices: React.FC<HotlinesAndNoticesProps> = ({
           {t.hotlinesTitle}
         </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <section className="lg:col-span-7 space-y-4">
+        <div
+          className={`grid grid-cols-1 ${
+            isMobileView ? 'gap-5' : 'lg:grid-cols-12 gap-6'
+          } items-start`}
+        >
+          <section className={`${isMobileView ? '' : 'lg:col-span-7'} space-y-4`}>
             <div className="flex items-center gap-2 text-[#154792]">
               <Megaphone className="w-5 h-5 text-[#1177F0]" />
               <h2 className="text-lg font-extrabold">Municipal Notices</h2>
@@ -150,7 +156,7 @@ export const HotlinesAndNotices: React.FC<HotlinesAndNoticesProps> = ({
             </div>
           </section>
 
-          <section className="lg:col-span-5 space-y-4">
+          <section className={`${isMobileView ? '' : 'lg:col-span-5'} space-y-4`}>
             <div className="flex items-center gap-2 text-[#154792]">
               <ShieldAlert className="w-5 h-5 text-[#1177F0]" />
               <h2 className="text-lg font-extrabold">Emergency Hotlines</h2>

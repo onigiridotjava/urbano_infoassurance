@@ -37,6 +37,7 @@ interface StatusDashboardProps {
   onReportUpdated: (report: IncidentReport) => void;
   onViewOnMap: (reportId: string) => void;
   onRequireAuth: () => void;
+  isMobileView?: boolean;
 }
 
 type FilterKey = 'all' | 'mine' | 'active' | 'resolved';
@@ -62,6 +63,7 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
   onReportUpdated,
   onViewOnMap,
   onRequireAuth,
+  isMobileView = false,
 }) => {
   const t = TRANSLATIONS[lang];
   const [filter, setFilter] = useState<FilterKey>('all');
@@ -290,7 +292,7 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
         </div>
 
         {/* 4-Column KPI Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div className={`grid grid-cols-2 ${isMobileView ? '' : 'lg:grid-cols-4'} gap-3`}>
           {[
             { label: 'Total Reports', value: stats.total, bg: 'bg-[#FEFFFE]', valCls: 'text-[#154792]' },
             { label: 'Acknowledged', value: stats.acknowledged, bg: 'bg-[#FEFFFE]', valCls: 'text-[#145EC1]' },
@@ -299,7 +301,7 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
           ].map((kpi) => (
             <div
               key={kpi.label}
-              className={`${kpi.bg} rounded-2xl border border-[#d6e4f7] px-5 py-4 shadow-2xs`}
+              className={`${kpi.bg} rounded-2xl border border-[#d6e4f7] px-4 sm:px-5 py-3.5 sm:py-4 shadow-2xs`}
             >
               <div
                 className={`text-xs font-bold ${
@@ -316,9 +318,13 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
         </div>
 
         {/* Shell with Optional Left Icon Sidebar (Jur-style) when LGU Staff is signed in */}
-        <div className="flex flex-col lg:flex-row gap-5 items-start">
+        <div className={`flex flex-col ${isMobileView ? '' : 'lg:flex-row'} gap-5 items-start`}>
           {user?.role === 'lgu_officer' && (
-            <aside className="w-full lg:w-20 bg-[#154792] rounded-2xl p-2.5 flex lg:flex-col items-center justify-around lg:justify-start gap-2.5 shrink-0 shadow-lg">
+            <aside
+              className={`w-full ${
+                isMobileView ? 'flex-row justify-around' : 'lg:w-20 lg:flex-col lg:justify-start'
+              } bg-[#154792] rounded-2xl p-2.5 flex items-center justify-around gap-2.5 shrink-0 shadow-lg`}
+            >
               {(
                 [
                   { id: 'triage_map' as LguSidebarMode, label: 'Triage', Icon: MapIcon },
@@ -332,7 +338,9 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
                     key={item.id}
                     type="button"
                     onClick={() => setLguMode(item.id)}
-                    className={`w-full lg:w-14 py-2.5 px-2 rounded-xl flex flex-col items-center justify-center gap-1 text-[10px] font-extrabold transition-colors ${
+                    className={`w-full ${
+                      isMobileView ? '' : 'lg:w-14'
+                    } py-2.5 px-2 rounded-xl flex flex-col items-center justify-center gap-1 text-[10px] font-extrabold transition-colors ${
                       active
                         ? 'bg-[#FBE95C] text-[#154792]'
                         : 'text-[#BFD9FA] hover:bg-white/10 hover:text-white'
@@ -348,7 +356,11 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
 
           <div className="flex-1 w-full space-y-5">
             {/* Search & Barangay/Category Filter Strip */}
-            <div className="bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-3.5 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+            <div
+              className={`bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-3.5 flex flex-col ${
+                isMobileView ? '' : 'xl:flex-row xl:items-center'
+              } justify-between gap-3`}
+            >
               <div className="flex flex-wrap items-center gap-1.5">
                 {(
                   [
@@ -423,9 +435,17 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
 
             {/* VIEW 1: LGU Triage & Map Split-View */}
             {user?.role === 'lgu_officer' && lguMode === 'triage_map' ? (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+              <div
+                className={`grid grid-cols-1 ${
+                  isMobileView ? '' : 'lg:grid-cols-12'
+                } gap-5 items-stretch`}
+              >
                 {/* Filterable Queue with AI Duplicate Alerts */}
-                <div className="lg:col-span-5 bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] divide-y divide-[#F3F7FD] max-h-[600px] overflow-y-auto">
+                <div
+                  className={`${
+                    isMobileView ? 'max-h-[340px]' : 'lg:col-span-5 max-h-[600px]'
+                  } bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] divide-y divide-[#F3F7FD] overflow-y-auto`}
+                >
                   {filteredReports.map((rep) => {
                     const selected = activeReport?.id === rep.id;
                     const isResolved = rep.status === 'resolved';
@@ -469,7 +489,7 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
                 </div>
 
                 {/* Right Map + Quick LGU Dispatch */}
-                <div className="lg:col-span-7 space-y-4">
+                <div className={`${isMobileView ? '' : 'lg:col-span-7'} space-y-4`}>
                   <div className="bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-3 h-[340px]">
                     <IncidentMap
                       reports={filteredReports}
@@ -643,9 +663,17 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
               </div>
             ) : (
               /* VIEW 3: Master-Detail Vertical Milestone Timeline Inspector */
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div
+                className={`grid grid-cols-1 ${
+                  isMobileView ? '' : 'lg:grid-cols-12'
+                } gap-6 items-start`}
+              >
                 {/* Report List */}
-                <div className="lg:col-span-5 bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] divide-y divide-[#F3F7FD] overflow-hidden">
+                <div
+                  className={`${
+                    isMobileView ? '' : 'lg:col-span-5'
+                  } bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] divide-y divide-[#F3F7FD] overflow-hidden`}
+                >
                   {filteredReports.length === 0 ? (
                     <div className="p-8 text-center text-xs font-bold text-[#4679C0]">
                       No matching San Mateo reports found.
@@ -691,7 +719,11 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
 
                 {/* Right Detail: Vertical Milestone Timeline & Metadata Rows */}
                 {activeReport && (
-                  <div className="lg:col-span-7 bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-6 space-y-6 shadow-sm">
+                  <div
+                    className={`${
+                      isMobileView ? 'p-4' : 'lg:col-span-7 p-6'
+                    } bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] space-y-6 shadow-sm`}
+                  >
                     <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#F3F7FD] pb-4">
                       <div>
                         <div className="flex items-center gap-2 text-xs">
@@ -717,8 +749,12 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
                     </div>
 
                     {/* Evidence Photo + Structured Metadata Rows */}
-                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
-                      <div className="sm:col-span-5 space-y-2">
+                    <div
+                      className={`grid grid-cols-1 ${
+                        isMobileView ? '' : 'sm:grid-cols-12'
+                      } gap-5 items-start`}
+                    >
+                      <div className={`${isMobileView ? '' : 'sm:col-span-5'} space-y-2`}>
                         <div className="relative rounded-2xl overflow-hidden border border-[#d6e4f7] bg-[#154792]">
                           {activeReport.mediaType === 'video' ? (
                             <video
@@ -748,7 +784,11 @@ export const StatusDashboard: React.FC<StatusDashboardProps> = ({
                         )}
                       </div>
 
-                      <dl className="sm:col-span-7 divide-y divide-[#F3F7FD] text-xs bg-[#F3F7FD]/60 rounded-2xl px-4 py-1 border border-[#e3eefb]">
+                      <dl
+                        className={`${
+                          isMobileView ? '' : 'sm:col-span-7'
+                        } divide-y divide-[#F3F7FD] text-xs bg-[#F3F7FD]/60 rounded-2xl px-4 py-1 border border-[#e3eefb]`}
+                      >
                         <div className="py-2.5 flex items-center justify-between gap-3">
                           <dt className="font-semibold text-[#4679C0]">Tracking ID</dt>
                           <dd className="font-mono font-bold text-[#154792] tabular-nums">

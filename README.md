@@ -7,7 +7,7 @@
 
 ---
 ## Where is the PDF file of the activies
-I have uploaded my activities inside the data folder 
+I have uploaded my activities inside the activities folder 
 
 data 
    >

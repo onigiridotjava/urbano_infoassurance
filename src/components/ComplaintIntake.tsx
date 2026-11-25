@@ -62,6 +62,7 @@ interface ComplaintIntakeProps {
   onNavigateToStatus: (reportId?: string) => void;
   onNavigateToMap: (reportId?: string) => void;
   onNavigateToHotlines: () => void;
+  isMobileView?: boolean;
 }
 
 const DEFAULT_LAT = 14.6967;
@@ -102,6 +103,7 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
   onNavigateToStatus,
   onNavigateToMap,
   onNavigateToHotlines,
+  isMobileView = false,
 }) => {
   const t = TRANSLATIONS[lang];
 
@@ -435,7 +437,11 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
       {/* ============================================================
           BAND 1: HERO BANNER (#145EC1 to #154792) + LOWER WEATHER STRIP
       ============================================================ */}
-      <section className="relative bg-gradient-to-br from-[#145EC1] via-[#154792] to-[#0F3470] text-white pt-10 sm:pt-12 pb-20 sm:pb-24 overflow-hidden">
+      <section
+        className={`relative bg-gradient-to-br from-[#145EC1] via-[#154792] to-[#0F3470] text-white ${
+          isMobileView ? 'pt-6 pb-16' : 'pt-7 sm:pt-12 pb-16 sm:pb-24'
+        } overflow-hidden`}
+      >
         {/* Subtle San Mateo cityscape & Sierra Madre SVG silhouette */}
         <svg
           className="pointer-events-none absolute right-0 bottom-0 h-full w-full lg:w-3/5 opacity-15"
@@ -455,9 +461,15 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
           <rect x="698" y="210" width="60" height="110" rx="4" fill="#FEFFFE" />
         </svg>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
-          <div className="max-w-3xl space-y-4">
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight leading-[1.12] text-white text-balance">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 space-y-4 sm:space-y-6">
+          <div className="max-w-3xl space-y-3 sm:space-y-4">
+            <h1
+              className={`font-display ${
+                isMobileView
+                  ? 'text-2xl leading-tight'
+                  : 'text-2xl sm:text-4xl lg:text-[42px] leading-[1.12]'
+              } font-extrabold tracking-tight text-white text-balance`}
+            >
               {t.heroHeadline}
             </h1>
 
@@ -572,9 +584,15 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
       {/* ============================================================
           6 OVERLAPPING HORIZONTAL CATEGORY CARDS (ON #FEFFFE BAND)
       ============================================================ */}
-      <section className="bg-[#FEFFFE] pb-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-12 relative z-20">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+      <section className="bg-[#FEFFFE] pb-7 sm:pb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-10 sm:-mt-12 relative z-20">
+          <div
+            className={`grid ${
+              isMobileView
+                ? 'grid-cols-2 gap-2.5'
+                : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-3.5'
+            }`}
+          >
             {OVERLAPPING_CATEGORIES.map((cat) => {
               const active = selectedCategory === cat.label;
               return (
@@ -582,13 +600,18 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
                   key={cat.label}
                   type="button"
                   onClick={() => handleSelectOverlappingCategory(cat)}
-                  className={`group bg-[#FEFFFE] rounded-2xl p-4 text-left transition-all shadow-lg shadow-[#154792]/8 flex flex-col items-start justify-between gap-3 border ${
+                  className={`group bg-[#FEFFFE] rounded-2xl ${
+                    isMobileView ? 'p-3 gap-2' : 'p-3.5 sm:p-4 gap-2.5 sm:gap-3'
+                  } text-left transition-all shadow-lg shadow-[#154792]/8 flex flex-col items-start justify-between border ${
                     active
                       ? 'border-[#1177F0] border-b-4 border-b-[#FBE95C] -translate-y-0.5'
                       : 'border-[#dce7f7] hover:border-[#5EABF0] hover:-translate-y-0.5'
                   }`}
                 >
-                  <CategorySvgIcon iconKey={cat.iconKey} className="w-10 h-10" />
+                  <CategorySvgIcon
+                    iconKey={cat.iconKey}
+                    className={isMobileView ? 'w-8 h-8' : 'w-9 h-9 sm:w-10 sm:h-10'}
+                  />
                   <span className="text-xs sm:text-[13px] font-bold text-[#154792] leading-snug">
                     {lang === 'tl' ? cat.tlTitle : cat.shortTitle}
                   </span>
@@ -602,8 +625,14 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
       {/* ============================================================
           BAND 2: GUIDED SEQUENTIAL 3-STEP REPORTING WORKFLOW (#F3F7FD)
       ============================================================ */}
-      <section ref={stepperRef} className="bg-[#F3F7FD] py-10 sm:py-12 border-y border-[#dde8f7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+      <section
+        id="report-stepper"
+        ref={stepperRef}
+        className={`bg-[#F3F7FD] ${
+          isMobileView ? 'py-6' : 'py-8 sm:py-12'
+        } border-y border-[#dde8f7]`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-5 sm:space-y-6">
           {/* Submission confirmation */}
           {submittedBanner && (
             <div className="bg-[#FEFFFE] border-2 border-[#1177F0] rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 shadow-sm">
@@ -701,9 +730,17 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
           )}
 
           {/* Split Workspace: Left Guided Form/Chat + Right Persistent San Mateo Map */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div
+            className={`grid grid-cols-1 ${
+              isMobileView ? '' : 'lg:grid-cols-12'
+            } gap-5 sm:gap-6 items-stretch`}
+          >
             {/* LEFT PANEL (7 cols) */}
-            <div className="lg:col-span-7 bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+            <div
+              className={`${
+                isMobileView ? 'p-4' : 'lg:col-span-7 p-5 sm:p-7'
+              } bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] shadow-sm flex flex-col justify-between`}
+            >
               {guidedMode ? (
                 <div className="flex flex-col h-full min-h-[420px] justify-between space-y-4">
                   <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#eef4fc]">
@@ -1064,7 +1101,11 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
             </div>
 
             {/* RIGHT PANEL (5 cols): Persistent Live San Mateo Map */}
-            <div className="lg:col-span-5 bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-3.5 shadow-sm flex flex-col gap-3">
+            <div
+              className={`${
+                isMobileView ? '' : 'lg:col-span-5'
+              } bg-[#FEFFFE] rounded-2xl border border-[#d6e4f7] p-3.5 shadow-sm flex flex-col gap-3`}
+            >
               <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-2 text-xs font-extrabold text-[#154792]">
                   <MapPin className="w-4 h-4 text-[#1177F0]" />
@@ -1074,7 +1115,7 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
                   {lat.toFixed(4)}, {lng.toFixed(4)}
                 </span>
               </div>
-              <div className="flex-1 min-h-[340px]">
+              <div className={isMobileView ? 'h-[240px]' : 'flex-1 min-h-[280px] sm:min-h-[340px]'}>
                 <IncidentMap
                   reports={reports}
                   mode="picker"
@@ -1083,7 +1124,7 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
                   onSelectLocation={handleMapSelect}
                   showIncidents={true}
                   showClosures={true}
-                  className="h-full min-h-[340px]"
+                  className={isMobileView ? 'h-full min-h-[240px]' : 'h-full min-h-[280px] sm:min-h-[340px]'}
                 />
               </div>
               <div className="px-1 flex items-center justify-between text-[11px] font-semibold text-[#4679C0]">
@@ -1114,8 +1155,14 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
             </button>
           </div>
 
-          {/* Horizontal Row of Photo-First Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Horizontal Row of Photo-First Cards (swipeable on mobile) */}
+          <div
+            className={
+              isMobileView
+                ? 'flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory'
+                : 'grid grid-cols-1 md:grid-cols-3 gap-5'
+            }
+          >
             {reports.slice(0, 3).map((report) => {
               const isResolved = report.status === 'resolved';
               const pct = getProgressPercent(report.status);
@@ -1124,7 +1171,9 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
                 <article
                   key={report.id}
                   onClick={() => setPreviewReportId(report.id)}
-                  className={`cursor-pointer bg-[#FEFFFE] rounded-2xl overflow-hidden border transition-all shadow-sm hover:shadow-md ${
+                  className={`${
+                    isMobileView ? 'min-w-[270px] snap-start shrink-0' : ''
+                  } cursor-pointer bg-[#FEFFFE] rounded-2xl overflow-hidden border transition-all shadow-sm hover:shadow-md ${
                     selected ? 'border-[#1177F0] ring-2 ring-[#1177F0]/20' : 'border-[#d6e4f7]'
                   }`}
                 >
@@ -1188,9 +1237,13 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
 
           {/* Vertical Milestone Timeline Preview Card */}
           {previewReport && (
-            <div className="bg-[#F3F7FD] rounded-2xl border border-[#d6e4f7] p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div
+              className={`bg-[#F3F7FD] rounded-2xl border border-[#d6e4f7] ${
+                isMobileView ? 'p-4 gap-5 grid-cols-1' : 'p-5 sm:p-8 grid-cols-1 lg:grid-cols-12 gap-8'
+              } grid items-start`}
+            >
               {/* Left: Vertical Milestone Nodes */}
-              <div className="lg:col-span-7 space-y-5">
+              <div className={`${isMobileView ? '' : 'lg:col-span-7'} space-y-5`}>
                 <h3 className="font-display text-lg font-extrabold text-[#154792]">
                   {t.liveTrackingTitle}
                 </h3>
@@ -1246,7 +1299,11 @@ export const ComplaintIntake: React.FC<ComplaintIntakeProps> = ({
               </div>
 
               {/* Right: Structured Metadata Rows */}
-              <div className="lg:col-span-5 bg-[#FEFFFE] rounded-2xl border border-[#dce8f8] p-5 space-y-4">
+              <div
+                className={`${
+                  isMobileView ? '' : 'lg:col-span-5'
+                } bg-[#FEFFFE] rounded-2xl border border-[#dce8f8] p-5 space-y-4`}
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-extrabold text-[#154792]">Report Metadata</span>
                   <button
