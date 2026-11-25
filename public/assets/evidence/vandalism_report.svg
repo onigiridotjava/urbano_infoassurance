@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+  <rect width="640" height="250" fill="#e2e8f0"/>
+  <rect y="250" width="640" height="170" fill="#475569"/>
+  <!-- Damaged street signage & graffiti -->
+  <rect x="110" y="80" width="420" height="165" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <path d="M165 190 Q220 120 275 185 T380 155" fill="none" stroke="#386986" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <rect x="455" y="110" width="12" height="150" fill="#64748b"/>
+  <polygon points="461,62 505,134 417,134" fill="#779663" stroke="#002E47" stroke-width="5" transform="rotate(14 461 108)"/>
+  <text x="20" y="396" fill="#e2e8f0" font-family="monospace" font-size="13">EVIDENCE PHOTO · VANDALISM &amp; DAMAGED SIGNAGE · GPS VERIFIED</text>
+</svg>

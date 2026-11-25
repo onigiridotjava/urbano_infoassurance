@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+  <rect width="640" height="240" fill="#f1f5f9"/>
+  <rect y="240" width="640" height="180" fill="#334155"/>
+  <rect y="218" width="640" height="28" fill="#cbd5e1"/>
+  <!-- Overgrown street tree branches & utility wires -->
+  <rect x="220" y="100" width="28" height="135" fill="#4a3728"/>
+  <circle cx="234" cy="95" r="72" fill="#2A4628"/>
+  <circle cx="176" cy="122" r="52" fill="#779663"/>
+  <circle cx="292" cy="118" r="56" fill="#779663"/>
+  <path d="M40 70 Q320 112 600 72" fill="none" stroke="#002E47" stroke-width="4"/>
+  <path d="M40 90 Q320 128 600 92" fill="none" stroke="#386986" stroke-width="3"/>
+  <text x="20" y="396" fill="#e2e8f0" font-family="monospace" font-size="13">EVIDENCE PHOTO · TREES &amp; GREENERY PRUNING · GPS VERIFIED</text>
+</svg>

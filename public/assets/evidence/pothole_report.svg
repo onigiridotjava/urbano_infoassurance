@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+  <rect width="640" height="220" fill="#e0f2fe"/>
+  <rect y="195" width="640" height="32" fill="#cbd5e1"/>
+  <rect x="65" y="80" width="150" height="118" rx="4" fill="#94a3b8"/>
+  <rect x="430" y="95" width="160" height="103" rx="4" fill="#64748b"/>
+  <rect y="227" width="640" height="193" fill="#334155"/>
+  <!-- Road pothole with pooled water -->
+  <ellipse cx="320" cy="316" rx="118" ry="46" fill="#1e293b"/>
+  <ellipse cx="320" cy="318" rx="98" ry="34" fill="#0f172a"/>
+  <ellipse cx="324" cy="321" rx="76" ry="22" fill="#2563eb" opacity="0.55"/>
+  <path d="M210 310 Q250 282 315 288 Q385 280 428 312" fill="none" stroke="#94a3b8" stroke-width="3"/>
+  <!-- Warning cone placed by barangay -->
+  <polygon points="455,295 475,232 495,295" fill="#ea580c"/>
+  <rect x="466" y="256" width="18" height="8" fill="#f8fafc"/>
+  <rect x="448" y="294" width="54" height="8" rx="2" fill="#9a3412"/>
+  <text x="20" y="396" fill="#e2e8f0" font-family="monospace" font-size="13">EVIDENCE PHOTO · ROAD DAMAGE / POTHOLE · GPS VERIFIED</text>
+</svg>

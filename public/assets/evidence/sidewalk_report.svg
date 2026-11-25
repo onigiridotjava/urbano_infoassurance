@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+  <rect width="640" height="230" fill="#dbeafe"/>
+  <rect x="30" y="70" width="580" height="150" rx="4" fill="#cbd5e1"/>
+  <rect y="220" width="640" height="55" fill="#e2e8f0"/>
+  <rect y="275" width="640" height="145" fill="#475569"/>
+  <!-- Sidewalk obstruction: parked delivery van & crates blocking pedestrian lane -->
+  <rect x="170" y="148" width="230" height="96" rx="10" fill="#1e3a8a"/>
+  <rect x="340" y="164" width="50" height="36" rx="4" fill="#bfdbfe"/>
+  <circle cx="215" cy="248" r="22" fill="#0f172a"/>
+  <circle cx="215" cy="248" r="10" fill="#94a3b8"/>
+  <circle cx="355" cy="248" r="22" fill="#0f172a"/>
+  <circle cx="355" cy="248" r="10" fill="#94a3b8"/>
+  <!-- Stacked crates on sidewalk -->
+  <rect x="425" y="195" width="44" height="44" rx="3" fill="#d97706"/>
+  <rect x="474" y="205" width="38" height="34" rx="3" fill="#b45309"/>
+  <text x="20" y="396" fill="#e2e8f0" font-family="monospace" font-size="13">EVIDENCE PHOTO · SIDEWALK OBSTRUCTION · GPS VERIFIED</text>
+</svg>
